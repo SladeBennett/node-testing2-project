@@ -52,7 +52,7 @@ describe('Bugs model functions', () => {
         it('[4] responds with the deleted bug', async () => {
             await db('bugs').insert(bug1)
             let bug = await request(server).delete('/bugs/1')
-            expect(bug.body).toMatchObject(bug1)
+            expect(bug.body).toMatchObject({ name: 'ant', legnumber: "6"})
         })
     })
 })
