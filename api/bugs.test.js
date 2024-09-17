@@ -49,5 +49,10 @@ describe('Bugs model functions', () => {
             bug = await db('bugs').where({bug_id}).first()
             expect(bug).toBeFalsy()
         })
+        it('[4] responds with the deleted bug', async () => {
+            await db('bugs').insert(bug1)
+            let bug = await request(server).delete('/bugs/1')
+            expect(bug.body).toMatchObject(bug1)
+        })
     })
 })

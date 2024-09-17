@@ -6,7 +6,9 @@ async function createBug(bug){
 }
 
 async function deleteBug(id){
-    return db('bugs').where('bug_id', id).del()
+    const bug = await db('bugs').where('bug_id', id).first()
+    await db('bugs').where('bug_id', id).del()
+    return bug
 }
 
 module.exports = {
