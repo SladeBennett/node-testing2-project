@@ -5,6 +5,11 @@ async function createBug(bug){
     return db('bugs').where('bug_id', id).first()
 }
 
+async function deleteBug(id){
+    return db('bugs').where('bug_id', id).del()
+}
+
 module.exports = {
     createBug,
+    deleteBug,
 }

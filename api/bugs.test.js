@@ -40,4 +40,14 @@ describe('Bugs model functions', () => {
             expect(bug).toMatchObject({ bug_id: 1, ...bug })
         })
     })
+    describe('[DELETE] / - deletes bug ', () => {
+        it('[3] removes bug from db', async () => {
+            const [bug_id] = await db('bugs').insert(bug1)
+            let bug = await db('bugs').where('bug_id', bug_id).first()
+            expect(bug).toBeTruthy()
+            await request(server).delete('/bugs/'+ bug_id)
+            bug = await db('bugs').where({bug_id}).first()
+            expect(bug).toBeFalsy()
+        })
+    })
 })
